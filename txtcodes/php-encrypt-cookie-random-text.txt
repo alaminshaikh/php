@@ -1,0 +1,153 @@
+$cookie_name = "check";
+$cookie_value = "pageloaded";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 365), "/");
+<?php
+// Set a cookie with the SameSite attribute
+setcookie("my_cookie", "cookie_value", [
+    "expires" => time() + 3600, // Set an expiration time (in this case, 1 hour from now)
+    "path" => "/", // Set the path for the cookie (root directory)
+    "domain" => "example.com", // Set the domain for the cookie
+    "secure" => true, // Send the cookie only over HTTPS (optional, but recommended)
+    "samesite" => "Lax" // Set the SameSite attribute to "Lax"
+]);
+
+echo "Cookie set successfully!";
+?>
+
+php encrypt decrypt
+    <?php     
+            
+            function encryptString($data, $key)
+            {
+                $method = "AES-256-CBC";
+                $ivLength = openssl_cipher_iv_length($method);
+                $iv = openssl_random_pseudo_bytes($ivLength);
+            
+                $encrypted = openssl_encrypt($data, $method, $key, OPENSSL_RAW_DATA, $iv);
+            
+                // Combine IV and encrypted data
+                $ciphertext = $iv . $encrypted;
+            
+                // Encode the result to a base64 string for safe storage or transmission
+                return base64_encode($ciphertext);
+            }
+            
+            // Example usage
+            $dataToEncrypt = $wbalance;
+            $encryptionKey = "alamin";
+            
+            $encryptedString = encryptString($dataToEncrypt, $encryptionKey);
+            //echo "Encrypted String: " . $encryptedString;
+
+
+        
+
+
+            function decryptString($data, $key)
+            {
+                $method = "AES-256-CBC";
+                $ivLength = openssl_cipher_iv_length($method);
+            
+                // Decode the base64 string to get the raw ciphertext
+                $ciphertext = base64_decode($data);
+            
+                // Extract the IV from the ciphertext
+                $iv = substr($ciphertext, 0, $ivLength);
+            
+                // Extract the encrypted data (excluding the IV)
+                $encrypted = substr($ciphertext, $ivLength);
+            
+                // Decrypt the data
+                $decrypted = openssl_decrypt($encrypted, $method, $key, OPENSSL_RAW_DATA, $iv);
+            
+                return $decrypted;
+            }
+            
+            // Example usage
+            //$encryptedString = "yourEncryptedStringHere"; // Replace with your actual encrypted string
+            $decryptionKey = "alamin"; // Replace with the same key used for encryption
+            
+            $decryptedString = decryptString($encryptedString, $decryptionKey);
+            //echo "Decrypted String: " . $decryptedString;
+?>
+
+
+
+
+<?php
+
+// The plain text password to be hashed
+$plaintext_password = "Password@123";
+
+// The hash of the password that
+// can be stored in the database
+$hash = password_hash($plaintext_password,
+		PASSWORD_DEFAULT);
+
+// Print the generated hash
+echo "Generated hash: ".$hash;
+?>
+
+
+-------------------------verify
+
+php hash password
+<?php
+
+// Plaintext password entered by the user
+$plaintext_password = "Password@123";
+
+// The hashed password retrieved from database
+$hash =
+"$2y$10$8sA2N5Sx/1zMQv2yrTDAaOFlbGWECrrgB68axL.hBb78NhQdyAqWm";
+
+// Verify the hash against the password entered
+$verify = password_verify($plaintext_password, $hash);
+
+// Print the result depending if they match
+if ($verify) {
+	echo 'Password Verified!';
+} else {
+	echo 'Incorrect Password!';
+}
+?>
+
+php cookie
+    $cookie_name = "user";
+    global $cookie_value;
+    $cookie_value = getRandomString(10);
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 365), "/"); // 86400 = 1 day  
+
+
+
+$cookie_name = "user";
+echo "<br>";
+if(!isset($_COOKIE[$cookie_name])) {
+  //   echo "Cookie named '" . $cookie_name . "' is not set!";
+  header("Location: plslogin.php");
+} else {
+ //    echo "Cookie '" . $cookie_name . "' is set!<br>";
+  //   echo "Value is: " . $_COOKIE[$cookie_name];
+}
+
+
+php random string
+function getRandomString($n)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+    }
+
+    return $randomString;
+}
+
+
+example-
+$cookie_name = "user";
+    global $cookie_value;
+    $cookie_value = getRandomString(10);
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 365), "/"); // 86400 = 1 day  

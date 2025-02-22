@@ -1,0 +1,2 @@
+date_default_timezone_set('Asia/Kolkata');
+$ctime = date('Y-m-d H:i:s');

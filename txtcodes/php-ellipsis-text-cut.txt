@@ -1,0 +1,16 @@
+<?php
+function truncateString($string, $maxLength) {
+    if (strlen($string) > $maxLength) {
+        return substr($string, 0, $maxLength - 3) . '...';
+    } else {
+        return $string;
+    }
+}
+?>
+
+<?php
+$text = "This is a very long string that needs to be truncated.";
+$maxLength = 20;
+$truncatedText = truncateString($text, $maxLength);
+?>
+<p><?php echo $truncatedText; ?></p>

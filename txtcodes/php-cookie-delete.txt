@@ -1,0 +1,6 @@
+<?php
+// Set the cookie with a name of 'example_cookie'
+setcookie('example_cookie', '', time() - 3600, '/');
+
+// The cookie will be deleted because its expiration time is set to a past date (1 hour ago)
+?>

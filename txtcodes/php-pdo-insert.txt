@@ -1,0 +1,50 @@
+<?php
+    
+    $baseUrl = 'https://gangatv.in'; // Replace with your actual domain
+
+    $dsn = 'mysql:host=localhost;dbname=esoftkin_tarama96';
+    $user = 'esoftkin_tarama96';
+    $pass = 'Pujaks@8910750363';
+    $option = array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+    );
+
+    try {
+        $con = new PDO($dsn, $user, $pass, $option);
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    catch(PDOException $e) {
+        echo 'Failed To Connect' . $e->getMessage();
+    }
+
+?>
+
+
+<?php
+
+include 'con.php';
+
+try {
+    // Sample data for insertion
+    $name = 'John Doe';
+    $email = 'john@example.com';
+    $age = 30;
+
+    // Prepare the SQL statement
+    $stmt = $con->prepare("INSERT INTO users (name, email, age) VALUES (:name, :email, :age)");
+
+    // Bind parameters
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':age', $age);
+
+    // Execute the query
+    $stmt->execute();
+
+    echo "New record inserted successfully";
+} catch(PDOException $e) {
+    echo 'Error: ' . $e->getMessage();
+}
+
+?>

@@ -1,0 +1,11 @@
+<?php
+// Simulated POST data (replace with actual form submission)
+$_POST['name'] = "<script>alert('XSS attack!');</script> John Doe & Jane Doe";
+
+// Sanitize the input using FILTER_SANITIZE_STRING
+$name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+
+// Output the sanitized name
+echo "Sanitized Name: $name";
+?>
+Sanitized Name: alert('XSS attack!'); John Doe & Jane Doe

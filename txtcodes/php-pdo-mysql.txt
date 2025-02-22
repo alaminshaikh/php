@@ -1,0 +1,44 @@
+<?php
+    
+    $baseUrl = 'https://gangatv.in'; // Replace with your actual domain
+
+    $dsn = 'mysql:host=localhost;dbname=esoftkin_tarama96';
+    $user = 'esoftkin_tarama96';
+    $pass = 'Pujaks@8910750363';
+    $option = array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+    );
+
+    try {
+        $con = new PDO($dsn, $user, $pass, $option);
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Assuming $phone contains the username you want to check
+        $phone = "username_to_check";
+
+        // Query to check if the user exists
+        $checkUser = "SELECT * FROM users WHERE username = :phone";
+        $stmt = $con->prepare($checkUser);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->execute();
+
+        // Count the fetched rows
+        $rowCount = $stmt->rowCount();
+
+        // Check if any rows were returned
+        if ($rowCount > 0) {
+            // If rows exist, fetch the userid
+            $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            $user_id = $userRow['UserId'];
+            echo $user_id;
+        } else {
+            // If no rows exist, print a message
+            echo "User does not exist.";
+        }
+    }
+
+    catch(PDOException $e) {
+        echo 'Failed To Connect' . $e->getMessage();
+    }
+
+?>
