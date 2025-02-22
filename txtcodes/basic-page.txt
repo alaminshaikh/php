@@ -1,0 +1,8 @@
+use this to write php
+
+<?php
+
+echo "Hello";
+?>
+
+writing only <?php is enough if the file has only php codes
